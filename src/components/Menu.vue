@@ -80,9 +80,9 @@ body {
 }
 
 .menu__list {
-    margin: 0;
+    padding: 0;
     width: 100%;
-    padding: 50px 0 0;
+    margin: 50px 0 0;
     list-style-type: none;
     height: 100%;
     overflow-y: auto;
@@ -110,4 +110,18 @@ body {
 .menu__link:hover {
     color: rgba(255, 255, 255, 0.7);
 }
+
+
+::-webkit-scrollbar {
+    width: 4px; }
+
+::-webkit-scrollbar-track {
+    background: #f1f1f105; }
+
+::-webkit-scrollbar-thumb {
+    background: #ffffff; }
+
+::-webkit-scrollbar-thumb:hover {
+    background: #555; }
+
 </style>

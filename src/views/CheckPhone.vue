@@ -1,14 +1,8 @@
 <template>
   <div class="check-phone main">
         <div class="main__head">
-            <span class="main__head-icon">
-                <svg class="main__head-svg" viewBox="0 0 13 11" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path d="M13 5.22918L6.49998 0.167969L3.74016 2.31687V1.17885H2.37541V3.37952L0 5.22918L0.838507 6.30597L1.70058 5.63469V10.832H11.2994V5.63465L12.1615 6.30592L13 5.22918ZM5.90858 9.25908V7.30293H7.09137V9.25908H5.90858ZM9.93462 9.46721H8.45613V5.93817H4.54382V9.46721H3.06534V4.572L6.49998 1.89762L9.93462 4.572V9.46721Z"
-      fill="black" fill-opacity="0.75"/>
-</svg>
-            </span>
+
             <a href="#" class="main__head-link">Панель управления </a>
-            <span class="main__head-path"> > </span>
             <a href="#" class="main__head-link"> Поиск устройства </a>
         </div>
         <div class="main__search">
@@ -172,15 +166,16 @@ export default {
         font-size: 14px;
     }
 
-    .main__head-icon {
-        width: 15px;
-        height: auto;
+    .main__head:before {
+        content: "";
+        display: block;
+        width: 15px ;
+        height: 17px;
         margin-right: 6px;
+        background-image: url("../assets/img/Vector (1).svg");
+        background-repeat: no-repeat;
     }
 
-    .main__head-svg {
-        width: 100%;
-    }
 
     .main__head-link {
         color: rgba(0, 0, 0, 0.75);
@@ -295,8 +290,8 @@ export default {
         font-size: 14px;
         font-weight: 500;
         background: #0089D7;
-        -webkit-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.64);
-        box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.64);
+        -webkit-box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.54);
+        box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.54);
         border-radius: 5px;
         border: none;
         padding: 10px 21px;
@@ -307,9 +302,14 @@ export default {
     }
 
     .main__search-submit:hover {
-        -webkit-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.24);
-        box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.24);
+        -webkit-box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.24);
+        box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.24);
+
     }
+
+
+
+
 
     .product {
         width: 65%;
@@ -417,8 +417,8 @@ export default {
         color: rgba(90, 101, 109, 0.87);
         padding: 10px 16px;
         background-color: #ffffff;
-        -webkit-box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.44);
-        box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.44);
+        -webkit-box-shadow: 0px 14px 21px rgba(95, 104, 111, 0.06);
+        box-shadow: 0px 14px 21px rgba(95, 104, 111, 0.06);
         border-radius: 2px;
         border: 0;
         outline: none;
