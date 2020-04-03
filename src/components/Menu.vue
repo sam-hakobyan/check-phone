@@ -7,13 +7,13 @@
         </div>
         <ul class="menu__list">
           <li class="menu__item">
-            <a href="" class="menu__link">Главная</a>
+            <a href="#" class="menu__link">Главная</a>
           </li>
           <li class="menu__item">
-            <a href="" class="menu__link">О нас</a>
+            <a href="#" class="menu__link">О нас</a>
           </li>
           <li class="menu__item">
-            <a href="" class="menu__link">Контакты</a>
+            <a href="#" class="menu__link">Контакты</a>
           </li>
         </ul>
   </div>
@@ -68,37 +68,46 @@ body {
 }
 
 .menu {
-  width: 225px;
-  padding: 50px 25px;
-  background: linear-gradient(300.16deg, #048CE6 34.98%, rgba(255, 255, 255, 0) 105.27%), linear-gradient(329.99deg, rgba(236, 239, 242, 0.5) 0%, rgba(255, 255, 255, 0) 100%), #048CE6;
+    width: 225px;
+    padding: 50px 25px;
+    background-image: linear-gradient(300.16deg, #048CE6 34.98%, rgba(255, 255, 255, 0) 105.27%), linear-gradient(329.99deg, rgba(236, 239, 242, 0.5) 0%, rgba(255, 255, 255, 0) 100%);
+    background-color: #048CE6;
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    overflow: hidden;
 }
 
 .menu__list {
-  margin: 0;
-  width: 100%;
-  padding: 50px 0 0;
-  list-style-type: none;
+    margin: 0;
+    width: 100%;
+    padding: 50px 0 0;
+    list-style-type: none;
+    height: 100%;
+    overflow-y: auto;
 }
 
 .menu__item {
-  margin-bottom: 25px;
+    margin-bottom: 25px;
 }
 
 .menu__item:last-child {
-  margin-bottom: 0;
+    margin-bottom: 0;
 }
 
 .menu__link {
-  text-decoration: none;
-  color: #ffffff;
-  font-size: 18px;
-  font-weight: 500;
-  padding: 5px 0;
-  -webkit-transition: .3s;
-  transition: .3s;
+    display: block;
+    text-decoration: none;
+    color: #ffffff;
+    font-size: 18px;
+    font-weight: 500;
+    padding: 5px 0;
+    -webkit-transition: .3s;
+    transition: .3s;
 }
 
 .menu__link:hover {
-  color: rgba(255, 255, 255, 0.7);
+    color: rgba(255, 255, 255, 0.7);
 }
 </style>
