@@ -1,19 +1,20 @@
 <template>
     <div id="menu" class="menu">
         <div class="logo">
-            <a href="#" class="logo__link">
+            <router-link class="logo__link" to="/">
                 <img src="../assets/img/image.png" alt="logo" class="logo__img">
-            </a>
+            </router-link>
+
         </div>
         <ul class="menu__list">
             <li class="menu__item">
-                <a href="#" class="menu__link">Главная</a>
+                <router-link class="menu__link" to="/">Главная</router-link>
             </li>
             <li class="menu__item">
-                <a href="#" class="menu__link">О нас</a>
+                <router-link class="menu__link" to="/">О нас</router-link>
             </li>
             <li class="menu__item">
-                <a href="#" class="menu__link">Контакты</a>
+                <router-link class="menu__link" to="/">Контакты</router-link>
             </li>
         </ul>
     </div>

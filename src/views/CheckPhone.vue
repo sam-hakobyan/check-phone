@@ -1,8 +1,9 @@
 <template>
     <div class="check-phone main">
         <div class="main__head">
-            <a href="#" class="main__head-link">Панель управления </a>
-            <a href="#" class="main__head-link"> Поиск устройства </a>
+            <router-link class="main__head-link" to="/">Панель управления</router-link>
+            <router-link class="main__head-link" to="/"> Поиск устройства</router-link>
+
         </div>
         <div class="main__search">
             <form class="main__search-form" @submit.prevent="checkPhoneSubmit">
@@ -13,8 +14,8 @@
                               fill="#0089D7"/>
                     </svg>
                 </span>
-                    <input type="text" class="main__search-input" ref="search_input"
-                           placeholder="Определить устройства по IMEI/SN">
+                    <input @input="inputValidation" type="text" class="main__search-input" ref="search_input"
+                           placeholder="Определить устройства по IMEI/SN" maxlength="15">
                 </label>
                 <button type="submit" class="main__search-submit">Найти устройств</button>
             </form>
@@ -55,7 +56,7 @@
                         <img v-bind:src="`https://chart.googleapis.com/chart?cht=qr&chs=177x177&chl=${this.device.number}&chld=H`"
                              alt="bar-code" class="bar-code__img">
                     </div>
-                    <input type="submit" class="bar-code__submit" value="Печать штрихкода">
+                    <div class="bar-code__submit">Печать штрихкода</div>
                 </div>
             </div>
         </div>
@@ -124,6 +125,19 @@
 <script>
     export default {
         name: 'CheckPhone',
+        data() {
+            return {
+                error: '',
+                device: {
+                    number: '',
+                    type: '',
+                    name: '',
+                    color: '',
+                    storage: '',
+                }
+            }
+        },
+
         methods: {
             checkPhoneSubmit: function () {
                 this.device = {
@@ -132,7 +146,7 @@
                     name: '',
                     color: '',
                     storage: '',
-                }
+                };
                 const value = this.$refs.search_input.value
 
                 if (!value.length) {
@@ -150,13 +164,15 @@
                 } else {
                     if (/[a-zA-Z]/.test(value[0])) {
                         if (/[oO]/.test(value)) {
-                            this.error = 'Серийный номер не может содержать буквы «O» или «o»';
+                            this.error = 'Серийный номер не может содержать буквы «O»';
                         } else if (value.length < 8 || value.length > 12) {
                             this.error = 'Серийный номер должен быть от 8 до 12 символов';
                         } else {
                             this.error = '';
                             this.generateDevice(value);
                         }
+                    } else {
+                        this.error = 'Неверный серийный номер или IMEI';
                     }
                 }
             },
@@ -212,20 +228,11 @@
                 const index = Math.floor(Math.random() * devices.length);
 
                 this.device = {...devices[index], number: value};
-            }
+            },
+            inputValidation: function (e) {
+                e.target.value = e.target.value.replace(/\W+/, '').slice(0, 15).toUpperCase();
+            },
         },
-        data() {
-            return {
-                error: '',
-                device: {
-                    number: '',
-                    type: '',
-                    name: '',
-                    color: '',
-                    storage: '',
-                }
-            }
-        }
     }
 
 </script>
@@ -512,17 +519,8 @@
         -webkit-box-shadow: 0px 14px 21px rgba(95, 104, 111, 0.06);
         box-shadow: 0px 14px 21px rgba(95, 104, 111, 0.06);
         border-radius: 2px;
-        border: 0;
-        outline: none;
-        cursor: pointer;
-        -webkit-transition: .2s;
-        transition: .2s;
     }
 
-    .bar-code__submit:hover {
-        -webkit-box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.24);
-        box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.24);
-    }
 
     .screen {
         margin-top: 80px;
