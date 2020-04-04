@@ -1,66 +1,63 @@
 <template>
-  <div class="check-phone main">
+    <div class="check-phone main">
         <div class="main__head">
-
             <a href="#" class="main__head-link">Панель управления </a>
             <a href="#" class="main__head-link"> Поиск устройства </a>
         </div>
         <div class="main__search">
-            <form action="" class="main__search-form">
+            <form class="main__search-form" @submit.prevent="checkPhoneSubmit">
                 <label class="main__search-label">
                 <span class="main__search-icon">
                     <svg class="main__search-svg" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path d="M11.6159 10.9301L8.75985 7.95969C9.49419 7.08675 9.89653 5.98841 9.89653 4.845C9.89653 2.17351 7.72303 0 5.05154 0C2.38005 0 0.206543 2.17351 0.206543 4.845C0.206543 7.51648 2.38005 9.68999 5.05154 9.68999C6.05445 9.68999 7.01018 9.38749 7.8273 8.81326L10.705 11.8062C10.8253 11.9311 10.9871 12 11.1604 12C11.3245 12 11.4802 11.9374 11.5984 11.8237C11.8495 11.5821 11.8575 11.1814 11.6159 10.9301ZM5.05154 1.26391C7.02619 1.26391 8.63262 2.87034 8.63262 4.845C8.63262 6.81965 7.02619 8.42608 5.05154 8.42608C3.07689 8.42608 1.47045 6.81965 1.47045 4.845C1.47045 2.87034 3.07689 1.26391 5.05154 1.26391Z"
-      fill="#0089D7"/>
-</svg>
+                        <path d="M11.6159 10.9301L8.75985 7.95969C9.49419 7.08675 9.89653 5.98841 9.89653 4.845C9.89653 2.17351 7.72303 0 5.05154 0C2.38005 0 0.206543 2.17351 0.206543 4.845C0.206543 7.51648 2.38005 9.68999 5.05154 9.68999C6.05445 9.68999 7.01018 9.38749 7.8273 8.81326L10.705 11.8062C10.8253 11.9311 10.9871 12 11.1604 12C11.3245 12 11.4802 11.9374 11.5984 11.8237C11.8495 11.5821 11.8575 11.1814 11.6159 10.9301ZM5.05154 1.26391C7.02619 1.26391 8.63262 2.87034 8.63262 4.845C8.63262 6.81965 7.02619 8.42608 5.05154 8.42608C3.07689 8.42608 1.47045 6.81965 1.47045 4.845C1.47045 2.87034 3.07689 1.26391 5.05154 1.26391Z"
+                              fill="#0089D7"/>
+                    </svg>
                 </span>
-                    <input type="text" class="main__search-input" placeholder="Определить устройства по IMEI/SN">
-
+                    <input type="text" class="main__search-input" ref="search_input"
+                           placeholder="Определить устройства по IMEI/SN">
                 </label>
-                <input type="submit" value="Найти устройств" class="main__search-submit">
+                <button type="submit" class="main__search-submit">Найти устройств</button>
             </form>
-
-
+            <p class="error_message">{{this.error}}</p>
         </div>
         <div class="product">
             <div class="product__head">
                 <span class="product__name">УСТРОЙСТВО</span>
                 <button class="product__change">Изменить</button>
             </div>
-
             <div class="product__middle">
                 <div class="product__info">
                     <ul class="product__info-list">
                         <li class="product__info-item">
                             <div class="product__info-name">SN/IMEI</div>
-                            <div class="product__info-value">1355352088049323</div>
+                            <div class="product__info-value">{{this.device.number}}</div>
                         </li>
                         <li class="product__info-item">
                             <div class="product__info-name">ТИП</div>
-                            <div class="product__info-value">Apple (Mobile)</div>
+                            <div class="product__info-value">{{this.device.type}}</div>
                         </li>
                         <li class="product__info-item">
                             <div class="product__info-name">НАЗВАНИЕ</div>
-                            <div class="product__info-value">Apple iPhone 5s 16GB 2 строка при необход.</div>
+                            <div class="product__info-value">{{this.device.name}}</div>
                         </li>
                         <li class="product__info-item">
                             <div class="product__info-name">ЦВЕТ</div>
-                            <div class="product__info-value">Silver</div>
+                            <div class="product__info-value">{{this.device.color}}</div>
                         </li>
                         <li class="product__info-item">
                             <div class="product__info-name">ОБЪЕМ</div>
-                            <div class="product__info-value">16 Gb</div>
+                            <div class="product__info-value">{{this.device.storage}}</div>
                         </li>
                     </ul>
                 </div>
-                <div class="product__bar-code">
+                <div class="product__bar-code" v-if="this.device.number">
                     <div class="bar-code">
-                        <img src="../assets/img/bar-code.png" alt="bar-code" class="bar-code__img">
+                        <img v-bind:src="`https://chart.googleapis.com/chart?cht=qr&chs=177x177&chl=${this.device.number}&chld=H`"
+                             alt="bar-code" class="bar-code__img">
                     </div>
                     <input type="submit" class="bar-code__submit" value="Печать штрихкода">
                 </div>
             </div>
-
         </div>
         <div class="screen">
             <ul class="screen__list">
@@ -91,7 +88,6 @@
                 </li>
             </ul>
         </div>
-
         <div class="history">
             <h2 class="history__title">ИСТОРИЯ</h2>
             <ul class="history__list">
@@ -99,41 +95,139 @@
                     <div class="history__date">14/09/2019</div>
                     <div class="history__slogan">Создан договор</div>
                     <div class="history__after">Рязанов Виктор Степанович</div>
-
                 </li>
                 <li class="history__item">
                     <div class="history__date">14/09/2019</div>
                     <div class="history__slogan">Создан договор</div>
                     <div class="history__after">Рязанов Виктор Степанович</div>
-
                 </li>
                 <li class="history__item">
                     <div class="history__date">14/09/2019</div>
                     <div class="history__slogan">Создан договор</div>
                     <div class="history__after">Рязанов Виктор Степанович</div>
-
                 </li>
                 <li class="history__item">
                     <div class="history__date">14/09/2019</div>
                     <div class="history__slogan">Создан договор</div>
                     <div class="history__after">Рязанов Виктор Степанович</div>
-
                 </li>
                 <li class="history__item">
                     <div class="history__date">14/09/2019</div>
                     <div class="history__slogan">Создан договор</div>
                     <div class="history__after">Рязанов Виктор Степанович</div>
-
                 </li>
             </ul>
         </div>
-  </div>
+    </div>
 </template>
 
 <script>
-export default {
-  name: 'CheckPhone',
-}
+    export default {
+        name: 'CheckPhone',
+        methods: {
+            checkPhoneSubmit: function () {
+                this.device = {
+                    number: '',
+                    type: '',
+                    name: '',
+                    color: '',
+                    storage: '',
+                }
+                const value = this.$refs.search_input.value
+
+                if (!value.length) {
+                    this.error = 'Поле не может быть пустым';
+                } else if (/^[0-9]+$/.test(value)) {
+                    if (value.length !== 15) {
+                        this.error = 'IMEI должен быть 15 символов';
+                    } else if (!this.luhnAlgorithm(value)) {
+                        this.error = 'Неверный IMEI';
+
+                    } else {
+                        this.error = '';
+                        this.generateDevice(value);
+                    }
+                } else {
+                    if (/[a-zA-Z]/.test(value[0])) {
+                        if (/[oO]/.test(value)) {
+                            this.error = 'Серийный номер не может содержать буквы «O» или «o»';
+                        } else if (value.length < 8 || value.length > 12) {
+                            this.error = 'Серийный номер должен быть от 8 до 12 символов';
+                        } else {
+                            this.error = '';
+                            this.generateDevice(value);
+                        }
+                    }
+                }
+            },
+            luhnAlgorithm: function (digits) {
+                let sum = 0;
+                for (let i = 0; i < digits.length; i++) {
+                    let cardNum = parseInt(digits[i]);
+                    if ((digits.length - i) % 2 === 0) {
+                        cardNum = cardNum * 2;
+
+                        if (cardNum > 9) {
+                            cardNum = cardNum - 9;
+                        }
+                    }
+                    sum += cardNum;
+                }
+                return sum % 10 === 0;
+            },
+            generateDevice: function (value) {
+                const devices = [
+                    {
+                        type: 'Apple',
+                        name: 'Apple iPhone 5s 16GB',
+                        color: 'Silver',
+                        storage: '16 GB',
+                    },
+                    {
+                        type: 'Apple',
+                        name: 'Apple iPhone X 256GB',
+                        color: 'White',
+                        storage: '256 GB',
+                    },
+                    {
+                        type: 'Samsung',
+                        name: 'Samsung Galaxy s9 128GB',
+                        color: 'Gold',
+                        storage: '128 GB',
+                    },
+                    {
+                        type: 'Apple',
+                        name: 'Apple iPhone 7 32GB',
+                        color: 'Jet Black',
+                        storage: '32 GB',
+                    },
+                    {
+                        type: 'Xiaomi',
+                        name: 'Xiaomi Redmi 5 32GB',
+                        color: 'White',
+                        storage: '32 GB',
+                    }
+                ];
+
+                const index = Math.floor(Math.random() * devices.length);
+
+                this.device = {...devices[index], number: value};
+            }
+        },
+        data() {
+            return {
+                error: '',
+                device: {
+                    number: '',
+                    type: '',
+                    name: '',
+                    color: '',
+                    storage: '',
+                }
+            }
+        }
+    }
+
 </script>
 
 <style>
@@ -144,14 +238,6 @@ export default {
         padding: 42px 40px 63px;
         background: #e5e5e5;
         overflow: hidden;
-    }
-
-    .main__field {
-        width: 100%;
-        height: 100%;
-        display: -webkit-box;
-        display: -ms-flexbox;
-        display: flex;
     }
 
     .main__head {
@@ -169,7 +255,7 @@ export default {
     .main__head:before {
         content: "";
         display: block;
-        width: 15px ;
+        width: 15px;
         height: 17px;
         margin-right: 6px;
         background-image: url("../assets/img/Vector (1).svg");
@@ -199,6 +285,7 @@ export default {
 
     .main__search {
         margin-top: 60px;
+        padding-left: 7px;
     }
 
     .main__search-form {
@@ -231,7 +318,6 @@ export default {
         -webkit-box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.12);
         box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.12);
         margin-right: 35px;
-        margin-left: 7px;
     }
 
     .main__search-input {
@@ -304,12 +390,14 @@ export default {
     .main__search-submit:hover {
         -webkit-box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.24);
         box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.24);
-
     }
 
-
-
-
+    .error_message {
+        color: red;
+        font-size: 13px;
+        margin-top: 6px;
+        padding-left: 13px;
+    }
 
     .product {
         width: 65%;
@@ -409,6 +497,10 @@ export default {
         -webkit-box-align: center;
         -ms-flex-align: center;
         align-items: center;
+    }
+
+    .bar-code > img {
+        width: 154px;
     }
 
     .bar-code__submit {
@@ -531,6 +623,4 @@ export default {
         text-overflow: ellipsis;
         white-space: nowrap;
     }
-
-
 </style>
